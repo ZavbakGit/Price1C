@@ -10,12 +10,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-fun downloadFile(url: String, dir: File, name: String? = null, fileExt: String? = null): File {
+fun downloadFile(url: String, dir: File, name: String? = null, fileExt: String? = null): File? {
+
     val client = OkHttpClient()
     val request = Request.Builder().url(url).build()
 
     val response = client.newCall(request).execute()
     val contentType = response.header("content-type", null)
+
     var ext = MimeTypeMap.getSingleton().getExtensionFromMimeType(contentType)
     ext = if (ext == null) {
         fileExt
@@ -30,22 +32,26 @@ fun downloadFile(url: String, dir: File, name: String? = null, fileExt: String? 
         File(dir.absolutePath, filename)
     } else {
 
-        val dateFormatWithZone =  SimpleDateFormat("yyyyMMdd-kkmmss", Locale.getDefault())
+        val dateFormatWithZone = SimpleDateFormat("yyyyMMdd-kkmmss", Locale.getDefault())
         File.createTempFile(dateFormatWithZone.format(Date()), ext, dir)
     }
 
-    val body = response.body
 
-    //val sink = Okio.buffer(Okio.sink(file))
+
+    if (response.code != 200) {
+        throw Exception(response.message)
+    }
+
+    if (file == null) {
+        throw Exception("Cant create file!")
+    }
+
+    val body = response.body
     val sink = file.sink().buffer()
-    /*
-    sink.writeAll(body!!.source())
-    sink.close()
-    body.close()
-     */
+
 
     body?.let {
-        body?.source().use { input ->
+        body.source().use { input ->
             sink.use { output ->
                 output.writeAll(input)
             }
