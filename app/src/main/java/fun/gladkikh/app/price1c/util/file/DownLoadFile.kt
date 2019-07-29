@@ -1,4 +1,4 @@
-package `fun`.gladkikh.app.price1c.util.net
+package `fun`.gladkikh.app.price1c.util.file
 
 import android.webkit.MimeTypeMap
 import okhttp3.OkHttpClient
@@ -9,8 +9,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-fun downloadFile(url: String, dir: File, name: String? = null, fileExt: String? = null): File? {
+fun downloadFile(url: String, dir: File, name: String? = null, fileExt: String? = null): File {
 
     val client = OkHttpClient()
     val request = Request.Builder().url(url).build()
