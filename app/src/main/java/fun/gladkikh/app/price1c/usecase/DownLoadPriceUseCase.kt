@@ -15,7 +15,7 @@ val fileZip = "price_1c.zip"
 val TAG = "anit"
 
 
-fun downLoadPrice(context: Context): Completable {
+fun downLoadPrice(context: Context): Single<WrapData> {
     val cacheDir = context.cacheDir
 
     return Single.just(urlZip)
@@ -55,7 +55,7 @@ fun downLoadPrice(context: Context): Completable {
             App.database.getItemPriceDao().dellALL()
             App.database.getItemPriceDao().insert(it.listItem)
         }
-        .ignoreElement()
+
 }
 
 
