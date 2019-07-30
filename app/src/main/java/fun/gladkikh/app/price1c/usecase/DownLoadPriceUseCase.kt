@@ -1,9 +1,11 @@
 package `fun`.gladkikh.app.price1c.usecase
 
 import `fun`.gladkikh.app.price1c.intity.Item
+import `fun`.gladkikh.app.price1c.util.PreferencesDelegate
 import `fun`.gladkikh.app.price1c.util.file.downloadFile
 import `fun`.gladkikh.app.price1c.util.file.unzip
 import android.content.Context
+import android.content.SharedPreferences
 import io.reactivex.Single
 import java.io.File
 
@@ -14,6 +16,8 @@ val TAG = "anit"
 
 
 fun downLoadPrice(context: Context): Single<List<Item>> {
+
+
     val cacheDir = context.cacheDir
     return Single.just(urlZip)
         //Загрузка

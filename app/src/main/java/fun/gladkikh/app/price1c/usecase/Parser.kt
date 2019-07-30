@@ -3,6 +3,7 @@ package `fun`.gladkikh.app.price1c.usecase
 import `fun`.gladkikh.app.price1c.intity.Item
 import `fun`.gladkikh.app.price1c.intity.Valuta
 import `fun`.gladkikh.app.price1c.intity.Vat
+import `fun`.gladkikh.app.price1c.util.PreferencesDelegate
 import android.content.Context
 import io.reactivex.Single
 import io.reactivex.rxkotlin.toFlowable
@@ -13,6 +14,7 @@ import java.io.InputStream
 import java.text.SimpleDateFormat
 
 fun parse(context: Context, file: File): Single<List<Item>> {
+
     val myInput: InputStream
     // initialize asset manager
     val assetManager = context.getAssets()
