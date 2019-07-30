@@ -1,11 +1,11 @@
 package `fun`.gladkikh.app.price1c.usecase
 
-import `fun`.gladkikh.app.price1c.intity.Item
-import `fun`.gladkikh.app.price1c.util.PreferencesDelegate
+import `fun`.gladkikh.app.price1c.App
+import `fun`.gladkikh.app.price1c.entity.ItemPrice
 import `fun`.gladkikh.app.price1c.util.file.downloadFile
 import `fun`.gladkikh.app.price1c.util.file.unzip
 import android.content.Context
-import android.content.SharedPreferences
+import io.reactivex.Completable
 import io.reactivex.Single
 import java.io.File
 
@@ -15,10 +15,9 @@ val fileZip = "price_1c.zip"
 val TAG = "anit"
 
 
-fun downLoadPrice(context: Context): Single<List<Item>> {
-
-
+fun downLoadPrice(context: Context): Completable {
     val cacheDir = context.cacheDir
+
     return Single.just(urlZip)
         //Загрузка
         .map {
@@ -51,7 +50,12 @@ fun downLoadPrice(context: Context): Single<List<Item>> {
         }
         .doOnSuccess {
             clearDir(cacheDir)
+
+            //TODO Надо удалять таблицу полностью, что бы id с нуля начинался
+            App.database.getItemPriceDao().dellALL()
+            App.database.getItemPriceDao().insert(it.listItem)
         }
+        .ignoreElement()
 }
 
 

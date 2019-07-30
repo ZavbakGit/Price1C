@@ -1,9 +1,6 @@
 package `fun`.gladkikh.app.price1c.usecase
 
-import `fun`.gladkikh.app.price1c.intity.Item
-import `fun`.gladkikh.app.price1c.intity.Valuta
-import `fun`.gladkikh.app.price1c.intity.Vat
-import `fun`.gladkikh.app.price1c.util.PreferencesDelegate
+import `fun`.gladkikh.app.price1c.entity.ItemPrice
 import android.content.Context
 import io.reactivex.Single
 import io.reactivex.rxkotlin.toFlowable
@@ -13,7 +10,7 @@ import java.io.File
 import java.io.InputStream
 import java.text.SimpleDateFormat
 
-fun parse(context: Context, file: File): Single<List<Item>> {
+fun parse(context: Context, file: File): Single<WrapData> {
 
     val myInput: InputStream
     // initialize asset manager
@@ -32,9 +29,6 @@ fun parse(context: Context, file: File): Single<List<Item>> {
     // We now need something to iterate through the cells.
     val rowIter = mySheet.rowIterator()
     var rowno = 0
-
-    var hashMapValuta = mutableMapOf<String, Valuta>()
-    var hashMapVat = mutableMapOf<String, Vat>()
 
 
     return mySheet.toFlowable()
@@ -61,22 +55,21 @@ fun parse(context: Context, file: File): Single<List<Item>> {
         }
         .map {
 
-            val valuta = hashMapValuta.getOrPut(it[2].trim(), { Valuta(it[2].trim()) })
-            val vat = hashMapVat.getOrPut(it[6].trim(), { Vat(it[6].trim()) })
+            val valuta = it[2].trim()
+            val vat = it[6].trim()
 
-            var startDate:Long = 0
+            var startDate: Long = 0
 
-            if (it[8] != null){
+            if (it[8] != null) {
 
                 try {
                     startDate = SimpleDateFormat("dd.MM.yyyy").parse(it[8].trim()).time
                 } catch (e: Exception) {
                 }
-
             }
 
 
-            Item(
+            ItemPrice(
                 code = it[0].trim(),
                 name = it[1].trim(),
                 valuta = valuta,
@@ -95,7 +88,14 @@ fun parse(context: Context, file: File): Single<List<Item>> {
         }
         .toList()
         .map {
+
+            val priceDate = mySheet.getRow(1).getCell(4).toString()
+
             myInput.close()
-            return@map it
+
+            return@map WrapData(
+                dataPriceStr = priceDate,
+                listItem = it
+            )
         }
 }
