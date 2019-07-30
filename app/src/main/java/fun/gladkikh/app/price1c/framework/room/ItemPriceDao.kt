@@ -19,4 +19,8 @@ interface ItemPriceDao {
 
     @Query("SELECT * FROM ItemPrice")
     fun getAll(): LiveData<List<ItemPrice>>
+
+    @Query("SELECT * FROM ItemPrice WHERE name LIKE:search AND valuta =:valu")
+    fun getAllWithNameLike(search: String,valu:String): LiveData<List<ItemPrice>>
+
 }
