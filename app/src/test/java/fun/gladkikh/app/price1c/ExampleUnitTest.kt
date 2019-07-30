@@ -1,6 +1,6 @@
 package `fun`.gladkikh.app.price1c
 
-import `fun`.gladkikh.app.price1c.intity.Valuta
+import `fun`.gladkikh.app.price1c.entity.Valuta
 import org.junit.Test
 
 import org.junit.Assert.*
