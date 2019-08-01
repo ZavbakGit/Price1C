@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit
 class PriseLisViewModel : BaseViewModel() {
 
     val ldSearchString = MutableLiveData<String>()
-    val ldPriceList = MutableLiveData<List<ItemPrice>>()
     val ldSMessage = SingleLiveEvent<String>()
     val ldShowProgress = SingleLiveEvent<Boolean>()
 
