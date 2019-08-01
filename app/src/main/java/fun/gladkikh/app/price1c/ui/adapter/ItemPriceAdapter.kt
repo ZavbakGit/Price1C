@@ -17,7 +17,7 @@ class ItemPriceAdapter : RecyclerView.Adapter<ItemPriceAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent?.context)
-            .inflate(R.layout.item_price, parent, false)
+            .inflate(R.layout.item_price_card, parent, false)
         return ViewHolder(itemView)
     }
 
