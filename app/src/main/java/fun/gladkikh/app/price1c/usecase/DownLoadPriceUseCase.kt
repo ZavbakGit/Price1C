@@ -1,18 +1,15 @@
 package `fun`.gladkikh.app.price1c.usecase
 
 import `fun`.gladkikh.app.price1c.App
-import `fun`.gladkikh.app.price1c.entity.ItemPrice
 import `fun`.gladkikh.app.price1c.util.file.downloadFile
 import `fun`.gladkikh.app.price1c.util.file.unzip
 import android.content.Context
-import io.reactivex.Completable
 import io.reactivex.Single
 import java.io.File
 
 val urlZip = "http://1c.ru/ftp/pub/pricelst/price_1c_.zip"
 val fileXls = "price_1c.xls"
 val fileZip = "price_1c.zip"
-val TAG = "anit"
 
 
 fun downLoadPrice(context: Context): Single<WrapData> {
@@ -44,7 +41,7 @@ fun downLoadPrice(context: Context): Single<WrapData> {
         .flatMap {
             Single.just(it as File)
         }
-        //Парсим
+        /* Парсим */
         .flatMap {
             parse(context, it)
         }
