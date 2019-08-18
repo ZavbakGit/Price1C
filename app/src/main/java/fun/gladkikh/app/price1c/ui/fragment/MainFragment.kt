@@ -26,6 +26,11 @@ class MainFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = ItemPriceAdapter()
         }
+
+        edSearch.setOnClickListener {
+            (activity as MainActivity).getHostNavController().navigate(R.id.aboutFragment,null,null)
+        }
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

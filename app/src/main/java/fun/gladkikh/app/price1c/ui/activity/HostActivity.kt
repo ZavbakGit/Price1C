@@ -1,7 +1,6 @@
-package `fun`.gladkikh.app.fastcountpallet.ui.activity
+package `fun`.gladkikh.app.price1c.ui.activity
 
 import androidx.navigation.NavController
-import io.reactivex.Flowable
 
 interface HostActivity{
     fun showMessage(text: CharSequence)

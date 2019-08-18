@@ -1,6 +1,6 @@
 package `fun`.gladkikh.app.price1c.ui.fragment
 
-import `fun`.gladkikh.app.fastcountpallet.ui.activity.HostActivity
+import `fun`.gladkikh.app.price1c.ui.activity.HostActivity
 import `fun`.gladkikh.app.price1c.ui.activity.MainActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
-import io.reactivex.Flowable
 
 open abstract class BaseFragment : Fragment() {
     lateinit var navController: NavController

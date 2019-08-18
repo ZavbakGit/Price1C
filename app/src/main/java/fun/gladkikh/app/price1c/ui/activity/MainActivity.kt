@@ -1,6 +1,5 @@
 package `fun`.gladkikh.app.price1c.ui.activity
 
-import `fun`.gladkikh.app.fastcountpallet.ui.activity.HostActivity
 import `fun`.gladkikh.app.price1c.R
 import android.view.View
 import androidx.navigation.NavController
@@ -10,7 +9,7 @@ import kotlinx.android.synthetic.main.main_fragment.*
 import kotlinx.android.synthetic.main.progress_overlay.*
 
 
-class MainActivity : BaseActivity(),HostActivity {
+class MainActivity : BaseActivity(), HostActivity {
     private lateinit var navController: NavController
 
     override fun getLayout() = R.layout.activity_main
